@@ -5,7 +5,7 @@ export async function fetchTasks({ query = '', status = '', page = 1, pageSize =
   if (query) params.set('q', query);
   if (status) params.set('status', status);
   params.set('page', String(page));
-  params.set('pageSize', String(pageSize));
+  params.set('pageSize', String(pageSize));  // FIX: was 'page', now 'pageSize'
 
   const url = `${API_BASE}/tasks?${params.toString()}`;
   console.log('[api] fetching:', url);
