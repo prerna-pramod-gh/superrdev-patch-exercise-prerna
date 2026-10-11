@@ -32,6 +32,15 @@ public class Task {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    // FIX: Ensure createdAt is always set on insert so the repository's
+    //      ORDER BY created_at DESC produces predictable ordering.
+    @PrePersist
+    protected void onCreate() {
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
